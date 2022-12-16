@@ -2,8 +2,7 @@
 Android native app to provide information on NYC High schools.
 
 ## Purpose
-It shows the use of **clean MVVM architecture** to display NYC High schools list and details fetched from [NYC OpenData](https://data.cityofnewyork.us/Education/DOE-High-
-School-Directory-2017/s3k6-pzi2) .
+It shows the use of **clean MVVM architecture** to display NYC High schools list and details fetched from [NYC OpenData](https://data.cityofnewyork.us/Education/DOE-High-School-Directory-2017/s3k6-pzi2).
 The fetching mechanism is handled by a repository layer.
 
 ## Features
