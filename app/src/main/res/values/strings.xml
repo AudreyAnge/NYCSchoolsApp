@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">20221209-AudreyAnge-NYCSchools</string>
+
+    <!-- School list -->
+    <string name="school_list_title">NYCSchools</string>
+    <string name="dot_delimiter">\u2022</string>
+    <string name="call">Call</string>
+    <string name="website">Website</string>
+    <string name="map">Directions</string>
+    <string name="search">Search</string>
+    <string name="school_search_hint">Search for a school</string>
+    <string name="empty_list_text">This list is empty</string>
+    <string name="empty_search_result_text">No search result</string>
+
+    <!-- School details -->
+    <string name="school_details_title">Details</string>
+    <string name="sat_chart_label">SAT Scores</string>
+</resources>

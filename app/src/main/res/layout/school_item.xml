@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:selectableItemBackground"
+    android:orientation="vertical"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPaddingBottom="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/school_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            card_view:layout_constraintBottom_toTopOf="@id/location"
+            card_view:layout_constraintStart_toStartOf="parent"
+            tools:text="NYC School" />
+
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            card_view:layout_constraintBottom_toBottomOf="@id/school_name"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="@id/start_time"
+            tools:text="Mountain View" />
+
+        <TextView
+            android:id="@+id/start_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/location"
+            tools:text="Opens 9am" />
+
+        <TextView
+            android:id="@+id/dot_delimiter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text="@string/dot_delimiter"
+            android:textSize="12sp"
+            card_view:layout_constraintBaseline_toBaselineOf="@id/start_time"
+            card_view:layout_constraintBottom_toBottomOf="@id/location"
+            card_view:layout_constraintEnd_toStartOf="@id/end_time"
+            card_view:layout_constraintStart_toEndOf="@id/start_time" />
+
+        <TextView
+            android:id="@+id/end_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0D2BD5"
+            card_view:layout_constraintBaseline_toBaselineOf="@id/start_time"
+            card_view:layout_constraintStart_toEndOf="@id/dot_delimiter"
+            tools:text="Closes 5pm" />
+
+        <Button
+            android:id="@+id/call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/call"
+            android:layout_margin="@dimen/button_margin"
+            android:textAllCaps="false"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@id/start_time"
+            tools:text="Call" />
+
+        <Button
+            android:id="@+id/website"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/website"
+            android:layout_margin="@dimen/button_margin"
+            android:textAllCaps="false"
+            card_view:layout_constraintBaseline_toBaselineOf="@id/call"
+            card_view:layout_constraintStart_toEndOf="@id/call"
+            tools:text="Website" />
+
+        <Button
+            android:id="@+id/map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/map"
+            android:layout_margin="@dimen/button_margin"
+            android:textAllCaps="false"
+            card_view:layout_constraintBaseline_toBaselineOf="@id/call"
+            card_view:layout_constraintStart_toEndOf="@id/website"
+            tools:text="Directions" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
