@@ -25,7 +25,7 @@ Here the libraries that has been used :
 
 As usual, get started by cloning the project on your local machine:  
 ```
-$ git clone https://github.com/AudreyAnge/NYCSchools.git
+$ git clone https://github.com/AudreyAnge/NYCSchoolsApp.git
 ```
 You can also create a new project from Android Studio by importing this project from git using the above git repository url.
 
