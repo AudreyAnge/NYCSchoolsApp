@@ -14,7 +14,7 @@ I used some useful android libraries to make the code clean, elegant, maintainab
 Here the libraries that has been used :
 
 - **Retrofit** : Handles Network calls. It simplifies the integration of REST based architecture using HTTP based annotations. It makes easy to retrieve data from the internet and using the converters it deserialized the response in Java model in a elegant manner. I also allows to transform the retrofit response into Rx Observable using an adapter.
-- **RxJava** Asynchronous data stream processing and to benefit the advantages of Observer Pattern. Using RxJava, I observed the data stream from the presenter and notifies the UI accordingly. It simplifies asynchronous task based on the fact that we are able to choose on which Schedulers we want to observe stream. It raises the level of abstraction around threading.
+- **Coroutines** is a light weight threads for asynchronous programming. It also provides a wealth of other possibilities such as concurrency, flows, etc
 - **MPAndroidChart** Chart framework. To display the SAT chart bar.
 - **Gson** to easily transform POJO <-->JSON. To avoid having the boilerplate of Json serialization/deserialization process. Based on annotation in my Item class, it will transform the Json payload into Java model.
 - **Data Binding**  - Using this, helps me to remove common boilerplate view code like findViewById, and directly link data to the UI which make the code cleaner by significantly reducing the lines of boilerplate code written.
