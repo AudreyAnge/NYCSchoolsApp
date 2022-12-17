@@ -11,17 +11,23 @@ import com.example.test20221209_audreyange_nycschools.repo.SchoolRepository
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class SchoolListViewModel(private val repository: SchoolRepository) : BaseViewModel() {
-
+class SchoolListViewModel(repository: SchoolRepository) : BaseViewModel(repository) {
+    @VisibleForTesting val cache: ArrayList<School> = ArrayList()
     val schoolListLiveData: MutableLiveData<List<School>> = MutableLiveData()
     val searchSchoolLiveData: MutableLiveData<List<School>> = MutableLiveData()
-    private var offset: Int = 0
     var fetchType: FetchType = FetchType.DEFAULT
-    @VisibleForTesting val cache: ArrayList<School> = ArrayList()
+    private var offset: Int = 0
+    private var nextOffset: Int = Config.OFFSET_INC_VALUE
+
+    fun canLoadMore(): Boolean {
+        return offset < nextOffset
+    }
 
     fun loadMore() {
-        offset += Config.OFFSET_INC_VALUE
-        fetchSchoolList(FetchType.LOAD_MORE)
+        if (canLoadMore()) {
+            offset = nextOffset
+            fetchSchoolList(FetchType.LOAD_MORE)
+        }
     }
 
     fun refreshData() {
@@ -50,10 +56,11 @@ class SchoolListViewModel(private val repository: SchoolRepository) : BaseViewMo
                 val result = it ?: ArrayList()
                 cache.addAll(result)
                 if (fetchType == FetchType.LOAD_MORE) {
-                    schoolListLiveData.value = result
-                } else {
-                    schoolListLiveData.value = result
+                    // Increment nextOffset for the next loading when there is a valid result
+                    nextOffset =
+                        if (result.isNotEmpty()) offset + Config.OFFSET_INC_VALUE else nextOffset
                 }
+                schoolListLiveData.value = result
 
             }
         }

@@ -61,7 +61,7 @@ class SchoolListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener 
                     1
                 ) ?: -1)
             ) {
-                binding.swipeRefreshLayout.isRefreshing = true
+                binding.swipeRefreshLayout.isRefreshing = viewModel.canLoadMore()
                 viewModel.loadMore()
             }
         }
@@ -149,20 +149,20 @@ class SchoolListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener 
         viewModel.schoolListLiveData.observe(
             this,
             Observer { schoolList ->
-                handleViewsVisibility(schoolList.isNotEmpty())
                 binding.swipeRefreshLayout.isRefreshing = false
                 if (viewModel.fetchType == SchoolListViewModel.FetchType.LOAD_MORE) {
                     adapter?.addSchools(schoolList)
                     return@Observer
                 }
+                handleViewsVisibility(schoolList.isNotEmpty())
                 adapter?.setSchoolList(schoolList)
             })
         viewModel.searchSchoolLiveData.observe(
-            this,
-            { response ->
-                handleViewsVisibility(response.isNotEmpty())
-                adapter?.setSchoolList(response)
-            })
+            this
+        ) { response ->
+            handleViewsVisibility(response.isNotEmpty())
+            adapter?.setSchoolList(response)
+        }
     }
 
     override fun onRefresh() {
@@ -195,7 +195,9 @@ class SchoolListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener 
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putCharSequence(SEARCH_QUERY_TEXT, searchView.query)
+        if (::searchView.isInitialized) {
+            outState.putCharSequence(SEARCH_QUERY_TEXT, searchView.query)
+        }
     }
 
     /**

@@ -44,7 +44,7 @@ abstract class BaseFragment : Fragment() {
     abstract fun observeViewModel()
 
     /**
-     * returns the view that will be used to create the fragment view.
+     * Returns the view that will be used to create the fragment view.
      */
     abstract fun initFragmentView(inflater: LayoutInflater): View
 

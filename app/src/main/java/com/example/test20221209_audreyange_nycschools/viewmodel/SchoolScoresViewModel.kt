@@ -8,7 +8,7 @@ import com.example.test20221209_audreyange_nycschools.repo.SchoolRepository
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
-class SchoolScoresViewModel(private val repository: SchoolRepository) : BaseViewModel() {
+class SchoolScoresViewModel(repository: SchoolRepository) : BaseViewModel(repository) {
     val schoolScoresLiveData: MutableLiveData<List<SchoolScore>> = MutableLiveData()
 
     fun fetchSchoolScores(id: String) {
