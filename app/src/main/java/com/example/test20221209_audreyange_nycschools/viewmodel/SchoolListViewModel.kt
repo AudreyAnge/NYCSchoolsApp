@@ -53,14 +53,13 @@ class SchoolListViewModel(repository: SchoolRepository) : BaseViewModel(reposito
             repository.fetchSchoolList(offset).catch {
                 schoolListLiveData.value = cache
             }.collect {
-                val result = it ?: ArrayList()
-                cache.addAll(result)
+                cache.addAll(it)
                 if (fetchType == FetchType.LOAD_MORE) {
                     // Increment nextOffset for the next loading when there is a valid result
                     nextOffset =
-                        if (result.isNotEmpty()) offset + Config.OFFSET_INC_VALUE else nextOffset
+                        if (it.isNotEmpty()) offset + Config.OFFSET_INC_VALUE else nextOffset
                 }
-                schoolListLiveData.value = result
+                schoolListLiveData.value = it
 
             }
         }
@@ -71,7 +70,7 @@ class SchoolListViewModel(repository: SchoolRepository) : BaseViewModel(reposito
             repository.fetchSchoolByName(queryText).catch {
                 searchSchoolLiveData.value = ArrayList()
             }.collect {
-                searchSchoolLiveData.value = it ?: ArrayList()
+                searchSchoolLiveData.value = it
             }
         }
     }

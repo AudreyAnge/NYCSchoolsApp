@@ -16,7 +16,7 @@ class SchoolScoresViewModel(repository: SchoolRepository) : BaseViewModel(reposi
             viewModelScope.launch {
                 repository.fetchSchoolScoreById(id).catch {
                     schoolScoresLiveData.value = ArrayList()
-                }.collect { schoolScoresLiveData.value = it ?: ArrayList() }
+                }.collect { schoolScoresLiveData.value = it }
             }
         }
     }
