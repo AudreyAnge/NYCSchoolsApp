@@ -76,9 +76,9 @@ class SchoolListViewModel(repository: SchoolRepository) : BaseViewModel(reposito
     }
 
     fun filterSchool(queryText: String) {
-        val filtered = schoolListLiveData.value?.filter { school ->
+        val filtered = cache.filter { school ->
             school.schoolName.lowercase().contains(queryText.lowercase())
-        } ?: ArrayList()
+        }
         searchSchoolLiveData.value = filtered
     }
 
