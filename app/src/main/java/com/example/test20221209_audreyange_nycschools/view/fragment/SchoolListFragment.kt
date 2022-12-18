@@ -201,13 +201,11 @@ class SchoolListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener 
     }
 
     /**
-     * Represents the different UI states. The DEFAULT state will show the regular school list
-     * fetched when the app started. The SEARCH state is triggered when the search icon is clicked.
-     * This would mean we're showing
+     * Represents the different UI states.
      */
     private enum class SurfaceMode {
-        DEFAULT,
-        SEARCH
+        DEFAULT, // State that identify regular unfiltered list display mode
+        SEARCH  // State that identify when we are in search mode
     }
 
     companion object {
