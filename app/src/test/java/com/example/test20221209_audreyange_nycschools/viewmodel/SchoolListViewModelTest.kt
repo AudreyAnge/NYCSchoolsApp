@@ -59,28 +59,50 @@ internal class SchoolListViewModelTest {
     }
 
     @Test
-    fun testSearchSchool() {
+    fun testSearchSchool_returnsNonEmptySearchResults() {
         val schoolName = "School name"
         coEvery { school.schoolName } returns schoolName
         coEvery { repo.fetchSchoolByName(any()) } returns flow { emit(ArrayList<School>().apply { add(school) }) }
 
         viewModel.searchSchool(schoolName)
 
-        coEvery { repo.fetchSchoolByName(eq(schoolName)) }
         assertNotNull(viewModel.searchSchoolLiveData.value)
-        assertEquals(school, viewModel.searchSchoolLiveData.value?.get(0))
+        assertEquals(viewModel.searchSchoolLiveData.value?.isNotEmpty(), true)
     }
 
     @Test
-    fun testFilterSchool() {
+    fun testSearchSchool_returnsEmptySearchResults() {
+        val schoolName = "School name"
+        coEvery { school.schoolName } returns schoolName
+        coEvery { repo.fetchSchoolByName(any()) } returns flow { emit(emptyList() ) }
+
+        viewModel.searchSchool("query")
+
+        assertNotNull(viewModel.searchSchoolLiveData.value)
+        assertEquals(viewModel.searchSchoolLiveData.value?.isEmpty(), true)
+    }
+
+    @Test
+    fun testFilterSchool_returnsNonEmptyFilteredResult() {
         val schoolName = "School name"
         coEvery { school.schoolName } returns schoolName
         viewModel.fetchSchools()
 
         viewModel.filterSchool(schoolName)
 
-        coEvery { repo.fetchSchoolByName(eq(schoolName)) }
-        assertNotNull(viewModel.schoolListLiveData.value)
-        assertEquals(viewModel.schoolListLiveData.value?.get(0), viewModel.searchSchoolLiveData.value?.get(0))
+        assertNotNull(viewModel.cache)
+        assertEquals(viewModel.searchSchoolLiveData.value?.isNotEmpty(), true)
+    }
+
+    @Test
+    fun testFilterSchool_returnsEmptyFilteredResult() {
+        val schoolName = "School name"
+        coEvery { school.schoolName } returns schoolName
+        viewModel.fetchSchools()
+
+        viewModel.filterSchool("query")
+
+        assertNotNull(viewModel.cache)
+        assertEquals(viewModel.searchSchoolLiveData.value?.isEmpty(), true)
     }
 }
